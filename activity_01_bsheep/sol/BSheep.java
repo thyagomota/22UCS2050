@@ -55,8 +55,8 @@ public class BSheep {
         // TODO: display the fence
         System.out.print("Fence coordinates: ");
         System.out.print("{(" + minX + "," + minY + "), ");
-        System.out.print("(" + minX + "," + maxY + "), ");
+        System.out.print("(" + maxX + "," + minY + "), ");
         System.out.print("(" + maxX + "," + maxY + "), ");
-        System.out.println("(" + maxX + "," + minY + ")}");
+        System.out.println("(" + minX + "," + maxY + ")}");
     }
 } // end of class definition
