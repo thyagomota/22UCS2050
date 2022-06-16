@@ -7,18 +7,33 @@
 public class ArrayListDriver {
 
     public static void main(String[] args) {
-       ArrayList array = new ArrayList();
-       array.add(3);
+       ArrayList<Book> array = new ArrayList<>();
+       array.add(new Book("A", "Joe"));
        System.out.println(array);
-       array.add(8);
+       array.add(new Book("B", "Mary"));
        System.out.println(array);
-       array.add(7);
+       array.add(new Book("C", "Jacob"));
        System.out.println(array);
-       array.add(2);
+//       array.add("Aline");
+//       System.out.println(array);
+//       array.add("Max");
+//       System.out.println(array);
+//       array.add("Clare");
+//       System.out.println(array);
+
+       // testing remove
+       array.remove(2);
        System.out.println(array);
-       array.add(0);
-       System.out.println(array);
-       array.add(5);
+       array.remove(0);
        System.out.println(array);
     }
 }
+
+
+/*
+
+source = [ 3, 6, 2, 1, 8 ]
+current (before) = [2, 9, 0 ]
+current (after) = [2, 9, 0, 3, 6, 2, 1, 8 ]
+
+ */
