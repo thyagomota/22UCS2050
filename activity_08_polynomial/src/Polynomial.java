@@ -12,14 +12,22 @@ public class Polynomial {
         firstTerm = null;
     }
 
-    // TODO: return the maximum exponent value of the polynomial
+    // TODOd: return the maximum exponent value of the polynomial
     public int degree() {
-
+        if (firstTerm == null)
+            return 0;
+        return firstTerm.getExponent();
     }
 
-    // TODO: return the number of terms of the polynomial
+    // TODOd: return the number of terms of the polynomial
     public int size() {
-        return 0;
+        int count = 0;
+        Term current = firstTerm;
+        while (current != null) {
+            count++;
+            current = current.getNext();
+        }
+        return count;
     }
 
     // TODO: add the given term to the polynomial (see activity instructions for more detailed information)
