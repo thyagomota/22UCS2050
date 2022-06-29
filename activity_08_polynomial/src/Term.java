@@ -4,7 +4,7 @@
  * Description: Activity 08 - Term
  */
 
-public class Term {
+public class Term implements Comparable<Term> {
 
     private double coefficient;
     private int    exponent;
@@ -85,5 +85,10 @@ public class Term {
     public static void main(String[] args) {
         Term term = new Term(8, 0);
         System.out.println(term);
+    }
+
+    @Override
+    public int compareTo(Term other) {
+        return exponent - other.getExponent();
     }
 }
