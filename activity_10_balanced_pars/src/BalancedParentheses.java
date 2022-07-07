@@ -10,7 +10,16 @@ public class BalancedParentheses {
 
     // TODO: implement isBalanced using a stack
     public static boolean isBalanced(String exp) {
-        return false;
+        Stack<Character> stack = new Stack<>();
+        String terms[] = exp.split(" ");
+        for (int i = 0; i < terms.length; i++) {
+            String term = terms[i];
+            if (term.equals("("))
+                stack.push('(');
+            else if (term.equals(")") && (stack.pop() == null))
+                    return false;
+        }
+        return stack.isEmpty();
     }
 
     public static void main(String[] args) {

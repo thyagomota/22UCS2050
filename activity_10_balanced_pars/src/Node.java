@@ -1,9 +1,8 @@
 /*
  * CS2050 - Computer Science II - Summer 2022
  * Instructor: Thyago Mota
- * Description: Activity 11 - Node
+ * Description: Activity 09 - Node
  */
-
 
 public class Node<E> {
 
