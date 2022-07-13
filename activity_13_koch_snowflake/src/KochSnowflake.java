@@ -21,27 +21,49 @@ public class KochSnowflake extends JPanel {
     KochSnowflake(int xPixel, int yPixel, int depth, double size, Color color) {
         super();
 
-        // TODO: finish implementation according to instructions
-
+        // TODOd: finish implementation according to instructions
+        this.xPixel = xPixel;
+        this.yPixel = yPixel;
+        this.depth = depth;
+        this.size = size;
     }
 
-    // TODO: implement helper method according to instructions
+    // TODOd: implement helper method according to instructions
     private void drawLine(Graphics g) {
-
+        int xPixelNew = (int) Math.round(xPixel + Math.cos(Math.toRadians(direction)) * size);
+        int yPixelNew = (int) Math.round(yPixel + Math.sin(Math.toRadians(direction)) * size);
+        g.drawLine(xPixel, yPixel, xPixelNew, yPixelNew);
+        xPixel = xPixelNew;
+        yPixel = yPixelNew;
     }
 
-    // TODO: implement helper method according to instructions
+    // TODOd: implement helper method according to instructions
     private void rotate(int degrees) {
+        direction += degrees;
     }
 
     // TODO: implement drawCurve according to instructions
     private void drawCurve(Graphics g, int depth) {
-
+        if (depth == 0)
+            drawLine(g);
+        else {
+            drawCurve(g, depth - 1);
+            rotate(60);
+            drawCurve(g, depth - 1);
+            rotate(-120);
+            drawCurve(g, depth - 1);
+            rotate(60);
+            drawCurve(g, depth - 1);
+        }
     }
 
     // TODO: implement drawSnowflake according to instructions
     private void drawSnowflake(Graphics g) {
-
+        drawCurve(g, depth);
+        rotate(-120);
+        drawCurve(g, depth);
+        rotate(-120);
+        drawCurve(g, depth);
     }
 
     @Override
