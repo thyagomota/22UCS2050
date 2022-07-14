@@ -11,21 +11,26 @@ public class BinarySearch {
     static boolean bsearch(int data[], int start, int end, int el) {
 
         // base case #1 (parameter validation)
-
+        if (start > end || start < 0 || end < 0 || start >= data.length || end >= data.length)
+            return false;
 
         // get the middle element
+        int middle = (start + end) / 2;  // or start + (end - start) / 2
 
         // is middle the element we are searching for?
-
+        if (data[middle] == el)
+            return true;
 
         // base case #2
-
+        if (start == end)
+            return false;
 
         // is the element greater than middle -> go right then
-        
+        if (el > data[middle])
+            return bsearch(data, middle + 1, end, el);
 
         // if not, go left
-
+        return bsearch(data, start, middle - 1, el);
     }
 
     public static void main(String[] args) {
