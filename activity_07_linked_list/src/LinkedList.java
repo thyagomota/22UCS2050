@@ -4,9 +4,11 @@
  * Description: Activity 07 - LinkedList
  */
 
-public class LinkedList {
+import java.util.Iterator;
 
-    private Node head;
+public class LinkedList<E> implements Iterable<E> {
+
+    private Node<E> head;
 
     public LinkedList() {
         head = null;
@@ -18,9 +20,9 @@ public class LinkedList {
     }
 
     // TODOd: add a new element (with the value) in front of the list!
-    public void add(int value) {
+    public void add(E value) {
         // create a new node
-        Node newNode = new Node(value);
+        Node<E> newNode = new Node<>(value);
         // have the next reference of the new node point to the current head (node)
         newNode.setNext(head);
         // update the head, have it point to the new node
@@ -28,16 +30,16 @@ public class LinkedList {
     }
 
     // TODO: add a new element (with the value) at the end of the list!
-    public void append(int value) {
+    public void append(E value) {
         // create a new node
-        Node newNode = new Node(value);
+        Node<E> newNode = new Node<>(value);
         // deal with the special case (list is empty)
         if (isEmpty())
             head = newNode;
         // all the other cases
         else {
             // find the tail's reference
-            Node current = head;
+            Node<E> current = head;
             while (current.getNext() != null)
                 current = current.getNext();
             // have the tail node next point to the new node
@@ -51,7 +53,7 @@ public class LinkedList {
         // using a for loop
 //        for (Node current = head; current != null; current = current.getNext())
 //            out += current + " ";
-        Node current = head;
+        Node<E> current = head;
         while (current != null) {
             out += current + " ";
             current = current.getNext();
@@ -64,7 +66,7 @@ public class LinkedList {
     // TODOd: do it!
     public int size() {
         int count = 0;
-        Node current = head;
+        Node<E> current = head;
         while (current != null) {
             count++;
             current = current.getNext();
@@ -73,10 +75,10 @@ public class LinkedList {
     }
 
     // TODO: return the element at index location
-    public int get(int index) {
+    public E get(int index) {
         if (index < 0)
             throw new ArrayIndexOutOfBoundsException();
-        Node current = head;
+        Node<E> current = head;
         int currentIndex = 0;
         while (current != null && currentIndex < index) {
             current = current.getNext();
@@ -88,8 +90,87 @@ public class LinkedList {
     }
 
     // TODO: sets value to location at index
-    public void set(int index, int value) {
+    public void set(int index, E value) {
 
     }
 
+    // TODO: inserts value at the given index location
+    // throw an exception if index is invalid
+    public void insert(int index, E value) {
+        if (index < 0)
+            throw new ArrayIndexOutOfBoundsException();
+        if (index == 0) {
+            if (isEmpty())
+                throw new ArrayIndexOutOfBoundsException();
+            else
+                add(value);
+        }
+        else {
+            Node<E> current = head;
+            int currentIndex = 0;
+            while (current != null && currentIndex < index - 1) {
+                current = current.getNext();
+                currentIndex++;
+            }
+            if (current == null || current.getNext() == null)
+                throw new ArrayIndexOutOfBoundsException();
+            Node<E> newNode = new Node<>(value);
+            newNode.setNext(current.getNext());
+            current.setNext(newNode);
+        }
+    }
+
+    // TODO: removes the element at the given index location
+    // throw an exception if index is invalid
+    public void remove(int index) {
+        if (index < 0)
+            throw new ArrayIndexOutOfBoundsException();
+        // removing the head
+        if (index == 0) {
+            // if there is no head -> throw an exception
+            if (head == null)
+                throw new ArrayIndexOutOfBoundsException();
+            // there is a head, so remove it!
+            Node<E> temp = head;
+            head = head.getNext();
+            temp.setNext(null); // gb optimization
+        }
+        // not removing the head
+        else {
+            Node<E> current = head;
+            int currentIndex = 0;
+            while (current != null && currentIndex < index - 1) {
+                current = current.getNext();
+                currentIndex++;
+            }
+            if (current == null || current.getNext() == null)
+                throw new ArrayIndexOutOfBoundsException();
+            Node<E> temp = current.getNext();
+            current.setNext(current.getNext().getNext());
+            temp.setNext(null);
+        }
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return new Iterator<E>() {
+
+            Node<E> current = head;
+
+            @Override
+            public boolean hasNext() {
+                return current != null;
+            }
+
+            @Override
+            public E next() {
+                if (current != null) {
+                    E value = current.getValue();
+                    current = current.getNext();
+                    return value;
+                }
+                return null;
+            }
+        };
+    }
 }
