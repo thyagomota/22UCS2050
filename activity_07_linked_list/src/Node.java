@@ -4,29 +4,29 @@
  * Description: Activity 07 - Node
  */
 
-public class Node {
+public class Node<E> {
 
-    private int  value;
-    private Node next;
+    private E       value;
+    private Node<E> next;
 
-    public Node(int value) {
+    public Node(E value) {
         this.value = value;
         next = null;
     }
 
-    public int getValue() {
+    public E getValue() {
         return value;
     }
 
-    public Node getNext() {
+    public Node<E> getNext() {
         return next;
     }
 
-    public void setValue(int value) {
+    public void setValue(E value) {
         this.value = value;
     }
 
-    public void setNext(Node next) {
+    public void setNext(Node<E> next) {
         this.next = next;
     }
 
