@@ -19,7 +19,7 @@ public class BinaryTree<E extends Comparable<E>> implements Iterable<E> {
     }
 
     private void addRecursively(BinNode<E> current, final E value) {
-        if (value.compareTo(current.getValue()) < 0) {
+        if (value.compareTo(current.getValue()) <= 0) {
             if (current.getLeft() == null)
                 current.setLeft(new BinNode<>(value));
             else
