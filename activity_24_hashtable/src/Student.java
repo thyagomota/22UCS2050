@@ -1,7 +1,7 @@
 /*
  * CS 2050 - Computer Science II - Summer 2022
  * Instructor: Thyago Mota
- * Description: Activity 26 - Student
+ * Description: Activity 24 - Student
  */
 
 public class Student implements Comparable<Student> {

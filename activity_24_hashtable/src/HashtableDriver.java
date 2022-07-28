@@ -1,7 +1,7 @@
 /*
  * CS 2050 - Computer Science II - Summer 2022
  * Instructor: Thyago Mota
- * Description: Activity 26 - HashtableDriver
+ * Description: Activity 24 - HashtableDriver
  */
 
 import java.io.FileInputStream;

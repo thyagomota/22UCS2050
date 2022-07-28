@@ -1,10 +1,9 @@
 /*
  * CS 2050 - Computer Science II - Summer 2022
  * Instructor: Thyago Mota
- * Description: Activity 26 - HashNode class
+ * Description: Activity 24 - Hashtable
  */
 
-public class HashNode<K, V> {
-
+public class Hashtable<K,V> {
 
 }
