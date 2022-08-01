@@ -17,46 +17,18 @@ public class BinaryTree<E extends Comparable<E>> {
         return root == null;
     }
 
-    private void addRecursivelyV2(BinNode<E> current, final E value) {
+    private void addRecursively(BinNode<E> current, final E value) {
         if (value.compareTo(current.getValue()) < 0) {
             if (current.getLeft() == null)
                 current.setLeft(new BinNode<>(value));
             else
-                addRecursivelyV2(current.getLeft(), value);
+                addRecursively(current.getLeft(), value);
         }
         else if (value.compareTo(current.getValue()) > 0) {
             if (current.getRight() == null)
                 current.setRight(new BinNode<>(value));
             else
-                addRecursivelyV2(current.getRight(), value);
-        }
-    }
-
-    // TODOd: implement the addRecursively private method
-    private BinNode<E> addRecursively(BinNode<E> current, final E value) {
-
-        // TODOd: check if current is null, if that is the case, return a new BinNode with the data
-        if (current == null)
-            return new BinNode(value);
-
-
-        // TODOd: if current is not null...
-        else {
-
-            // TODOd: if given value is smaller than current value, call addRecursively to the left, making sure to use the method's return to set current's left node
-            if (value.compareTo(current.getValue()) < 0)
-                current.setLeft(
-                        addRecursively(current.getLeft(), value)
-                );
-
-            // TODOd: if given data is greater than current data, call addRecursively to the right, making sure to use the method's return to set current's right node
-            else if (value.compareTo(current.getValue()) > 0)
-                current.setRight(
-                        addRecursively(current.getRight(), value)
-                );
-
-            // TODOd: don't forget to return current
-            return current;
+                addRecursively(current.getRight(), value);
         }
     }
 
@@ -65,13 +37,35 @@ public class BinaryTree<E extends Comparable<E>> {
         if (root == null)
             root = new BinNode<>(value);
         else
-            addRecursivelyV2(root, value);
-//        root = addRecursively(root, value);
+            addRecursively(root, value);
     }
 
-    // TODOd: override the toString method using a breadth first tree traversal using a queue of binary nodes
-    @Override
-    public String toString() {
+    private String preOrder(final BinNode<E> current) {
+        if (current != null)
+            return current.getValue() + " " +
+                    preOrder(current.getLeft()) +
+                    preOrder(current.getRight());
+        return "";
+    }
+
+    private String inOrder(final BinNode<E> current) {
+        if (current != null)
+            return inOrder(current.getLeft()) +
+                    current.getValue() + " " +
+                    inOrder(current.getRight());
+        return "";
+    }
+
+    private String postOrder(final BinNode<E> current) {
+        if (current != null)
+            return postOrder(current.getLeft()) +
+                    postOrder(current.getRight()) +
+                    current.getValue() + " ";
+
+        return "";
+    }
+
+    private String levelOrder() {
         String out = "";
         if (!isEmpty()) {
             Queue<BinNode<E>> queue = new Queue<>();
@@ -87,5 +81,35 @@ public class BinaryTree<E extends Comparable<E>> {
             out = out.trim();
         }
         return out;
+    }
+
+    @Override
+    public String toString() {
+        return postOrder(root);
+    }
+
+
+    private boolean containsRecursively(BinNode<E> current, final E value) {
+        if (value.compareTo(current.getValue()) == 0)
+            return true;
+        else if (value.compareTo(current.getValue()) < 0) {
+            if (current.getLeft() == null)
+                return false;
+            else
+                return containsRecursively(current.getLeft(), value);
+        }
+        else {
+            if (current.getRight() == null)
+                return false;
+            else
+                return containsRecursively(current.getRight(), value);
+        }
+    }
+
+    public boolean contains(E value) {
+        if (root == null)
+            return false;
+        else
+            return containsRecursively(root, value);
     }
 }
